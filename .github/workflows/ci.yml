@@ -24,3 +24,6 @@ jobs:
 
       - name: Run PHPStan
         run: docker run --rm symfony-devops-lab php vendor/bin/phpstan analyse
+      
+      - name: Security audit
+        run: docker run --rm symfony-devops-lab composer audit
