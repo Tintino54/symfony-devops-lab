@@ -18,3 +18,6 @@ jobs:
 
       - name: Run PHPUnit
         run: docker run --rm symfony-devops-lab php bin/phpunit
+
+      - name: Check code style
+        run: docker run --rm symfony-devops-lab php bin/php-cs-fixer fix --dry-run --diff
