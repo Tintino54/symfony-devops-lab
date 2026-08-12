@@ -21,3 +21,6 @@ jobs:
 
       - name: Check code style
         run: docker run --rm symfony-devops-lab php vendor/bin/php-cs-fixer fix --dry-run --diff
+
+      - name: Run PHPStan
+        run: docker run --rm symfony-devops-lab php vendor/bin/phpstan analyse
