@@ -11,6 +11,8 @@ CONTAINER ?= symfony-app
 enter:
 	@docker exec -it $(CONTAINER) bash
 
+rebuild:
+	@docker build -t symfony-devops-lab .
 router:
 	@docker exec -it $(CONTAINER) php bin/console debug:router
 
