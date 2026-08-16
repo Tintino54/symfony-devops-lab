@@ -13,7 +13,7 @@ class HomeControllerTest extends WebTestCase
 
         $this->assertResponseStatusCodeSame(200);
         $this->assertStringContainsString(
-            'Hello from HomeController',
+            'Hello from HomeController and automatic deployment!',
             $client->getResponse()->getContent()
         );
     }
