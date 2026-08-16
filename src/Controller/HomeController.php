@@ -13,6 +13,6 @@ class HomeController extends AbstractController
     #[Route('/pouet', name: 'home')]
     public function index(): Response
     {
-        return new Response('Hello from HomeController', Response::HTTP_OK, ['Content-Type' => 'text/plain']);
+        return new Response('Hello from HomeController and automatic deployment!', Response::HTTP_OK, ['Content-Type' => 'text/plain']);
     }
 }
