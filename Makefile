@@ -16,3 +16,5 @@ rebuild:
 router:
 	@docker exec -it $(CONTAINER) php bin/console debug:router
 
+start:
+	@docker-compose up -d

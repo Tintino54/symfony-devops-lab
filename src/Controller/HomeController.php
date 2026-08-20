@@ -19,6 +19,6 @@ class HomeController extends AbstractController
     #[Route('/health', name: 'health')]
     public function health(): Response
     {
-        return new Response('NOT OK', 500);
+        return new Response('OK');
     }
 }
