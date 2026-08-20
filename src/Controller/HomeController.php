@@ -15,4 +15,10 @@ class HomeController extends AbstractController
     {
         return new Response('Hello from HomeController and automatic deployment!', Response::HTTP_OK, ['Content-Type' => 'text/plain']);
     }
+
+    #[Route('/health', name: 'health')]
+    public function health(): Response
+    {
+        return new Response('OK');
+    }
 }
