@@ -70,15 +70,16 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
           EC2_INSTANCE_ID: ${{ secrets.EC2_INSTANCE_ID }}
         run: |
+          DEPLOY_SCRIPT=$(base64 -w 0 deploy/deploy.sh)
+
           COMMAND_ID=$(aws ssm send-command \
             --instance-ids "$EC2_INSTANCE_ID" \
             --document-name "AWS-RunShellScript" \
             --comment "Deploy Symfony ${IMAGE_TAG}" \
             --parameters commands="[
-              \"aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY\",
-              \"docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG\",
-              \"docker rm -f symfony-app || true\",
-              \"docker run -d --restart unless-stopped --name symfony-app -p 80:8000 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG\"
+              \"echo $DEPLOY_SCRIPT | base64 -d > /tmp/deploy.sh\",
+              \"chmod +x /tmp/deploy.sh\",
+              \"ECR_REGISTRY=$ECR_REGISTRY ECR_REPOSITORY=$ECR_REPOSITORY IMAGE_TAG=$IMAGE_TAG AWS_REGION=$AWS_REGION /tmp/deploy.sh\"
             ]" \
             --query "Command.CommandId" \
             --output text)
