@@ -62,6 +62,7 @@ if [ -n "$PREVIOUS_IMAGE" ]; then
     if curl --fail --silent --show-error \
         --retry 12 \
         --retry-delay 5 \
+        --retry-all-errors \
         --retry-connrefused \
         --retry-max-time 60 \
         http://localhost/health
